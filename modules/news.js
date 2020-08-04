@@ -39,13 +39,9 @@ module.exports = class News {
     
     async getAllNews(){
         try {
-            let sql = `SELECT * FROM news`;
-            let allNews = await this.db.all(sql, (err, rows) => {
-                if (err) console.error(err.message)
-                if (!err) console.log(rows)
-            })
+            let sql = `SELECT * FROM news WHERE released=?`;
+            let allNews = await this.db.all(sql, ['yes']);
             return allNews;
-            console.log(allNews)
         } catch (error) {
             console.log(error);
         }
